@@ -7,7 +7,7 @@ High Efficiency Elective Dominator (with GUI)
 
 1. 选择使用构建好的版本或者从源码运行
      - 如果要从源码运行，请确认 Python 版本 ≥ 3.6，然后 `pip install -r requirements.txt`，已在 Windows 10 和 Ubuntu 20.04（GNOME 桌面环境）上测试可用
-     - 如果要运行构建好的版本，只需要一个 64 位的 Windows，然后 [从 releases 里进行一个下载](https://github.com/xmcp/HEED-GUI/releases)，注意这样将**无法支持识别验证码和推送通知**功能（其实源码版也不支持，但是留了相应接口允许你配置，参见后面 “高级功能”）
+     - 如果要运行构建好的版本，只需要一个 64 位的 Windows，然后 [从 releases 里进行一个下载](https://github.com/xmcp/HEED-GUI/releases)
 2. 运行 `main.pyw`，输入学号和密码
    - 如果你有双学位，请在学号后面加 `@bzx`（表示主修）或者 `@bfx`（表示辅双），例如 `1900012345@bfx` 
 3. 你将看到一个主窗口（用于操作）和一个日志窗口（用于查看工作状态）
@@ -29,29 +29,17 @@ High Efficiency Elective Dominator (with GUI)
 
 ## 高级功能
 
-### 自动识别验证码
-
-请自己想办法接入商业 API 或者凹模型。
-
-修改 `captcha.py`，函数 `recognize` 接收一个 `PIL.Image` 类型的图片作为参数，返回一个字符串作为识别结果。
-
-配置完后勾选主窗口的 `Captcha` 来启用自动识别验证码。
-
-为了方便调试模型，还有一个 `aux_captcha_widget.pyw` 脚本可以单独测试验证码识别功能。
-
-
-
-### 推送通知
-
-请自己想办法接入推送 API。
-
-修改 `notifier.py`，方法 `_do_notif` 接收一个字符串类型的消息内容。目前给的例子是飞书的机器人发消息 API。
-
-配置完后勾选主窗口的 `Notif` 来启用推送通知。
-
-勾选后会立即发送一条 “服务已启动” 来帮助你测试推送通知是否功能正常。
-
-
+```json
+{
+  "tt_username": "", 
+  "tt_password": "", 
+  "feishu_webhook_url": "" 
+}
+```
+复制`config.example.json`到`config.json`
+- `tt_username`：[tt识图](http://www.ttshitu.com/) 用户名
+- `tt_password`：[tt识图](http://www.ttshitu.com/) 密码
+- `feishu_webhook_url`：飞书机器人`WebHook URL`
 
 ### 预先输入待选列表
 

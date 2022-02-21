@@ -2,3 +2,5 @@ requests
 beautifulsoup4
 pillow
 lxml
+urllib3
+watchdog
