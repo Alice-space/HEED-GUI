@@ -105,7 +105,17 @@ class Orchestrator:
                         self.log('success' if ok else 'warning', reason)
                         if ok:
                             self.remove_wishlist_by_name(course['name'])
-
+                        else:
+                            info = (course['name'], course['classid'])
+                            if info in self.wishlist:
+                                self.log(
+                                    'info', f'remove from wishlist {course["name"]} {course["classid"]}')
+                                self.wishlist.remove(info)
+                            else:
+                                self.log(
+                                    'info', f'add to wishlist {course["name"]} {course["classid"]}')
+                                self.wishlist.append(info)
+                            self.update_wish_var()
                     bot.select(course['selecturl'], callback)
                 else:
                     self.log(
